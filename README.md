@@ -1,121 +1,13 @@
 # review-writing
 
-[![Skill self-check](https://github.com/crce-ux/review-writing/actions/workflows/structure.yml/badge.svg)](https://github.com/crce-ux/review-writing/actions/workflows/structure.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+**已并入 [`ai-academic-writing`](https://github.com/crce-ux/ai-academic-writing)。**
 
-**把证据表写成一篇有论点的综述——不是一堆摘要的合集。**
+综述成文的全部内容，现全部在：
 
-> 🔴 **两句总纲**
-> **名头与配置必须自洽**（自称系统综述就得有 PRISMA）。
-> **把框架拿掉，剩下不该是一堆摘要。**
+- [`ai-academic-writing/SKILL.md`](https://github.com/crce-ux/ai-academic-writing/blob/main/SKILL.md) 的「文体分叉：论文 / 综述」
+- [`ai-academic-writing/references/review-article.md`](https://github.com/crce-ux/ai-academic-writing/blob/main/references/review-article.md) — 三种名头各自的配置、常见失败模式、定稿九问
+- [`ai-academic-writing/references/review-drafting.md`](https://github.com/crce-ux/ai-academic-writing/blob/main/references/review-drafting.md) — 一个段落的四种句子、三种「写不下去」的解法、段间推进、写作顺序
+- `scripts/check_review_article.py` — 名头与配置自洽机检
 
-```
-检索 → 证据表 ──→ ⬅ 综述成文 ──→ 引用审查
-(literature-pipeline)           (citation-reviewer)
-```
-
-**两头都管：怎么写（八步）· 写完对不对（机检）。**
-
----
-
-## 成文流程（八步）
-
-| 步 | 动作 | 判据 |
-|---|---|---|
-| **① 定论点** | 贡献是**新的组织**，不是新数据 | 框架拿掉，剩的是不是一堆摘要？ |
-| **② 选结构** | 时间序 / 主题式 / 论证式，**选一个** | 混用 = 读者不知道自己在哪 |
-| **③ 搭骨架** | **每节一句话论断** | 写不出论断的节，**不该存在** |
-| **④ 排证据** | 挑行，按 **支持 / 反证 / 存疑** 分层 | ❌ 只挑支持自己的 |
-| **⑤ 分节撰写** | 论断句 + 证据句 + **判断句** | **缺判断句 = 罗列** |
-| **⑥ 整合讨论** | 证据全景 / 共同局限 / 未来方向 | 三件缺一不可 |
-| **⑦ 摘要** | 结构式，或 ≤250 字 | **不是目录** |
-| **⑧ 机检** | R1/R2 + 引用双向核对 | 见下 |
-
-### 🔴 写作顺序是反的
-
-```
-主体（证据最扎实那节）→ 整合讨论 → 引言 → 摘要
-```
-
-> **从引言开始写，等于在还不知道结论的时候先承诺一个论点。**
-
-**一个段落的四种句子**、**三种「写不下去」的解法**、**段间推进三动作**见
-[`references/drafting.md`](references/drafting.md)。
-
----
-
-## 一、先定性质 ⭐
-
-| 名头 | 方法学透明性 | 你在干什么 |
-|---|---|---|
-| **叙述性综述** | 建议写「方法与范围」 | **立一个论点** |
-| **系统综述** | 🔴 必须有：检索策略 / 纳排 / PRISMA / 去重 | 回答一个**可穷尽**的问题 |
-| **范围综述** | 🔴 必须有：检索 + PRISMA-ScR | **绘地图**，不下结论 |
-
-> 名头拿不准 → 写叙述性。
-
----
-
-## 二、论点驱动，不是文献罗列
-
-**反面**：A 说 X（2021）。B 说 Y（2022）。C 也做了（2023）。
-
-**自检**：**把框架拿掉，剩下的是不是一堆摘要？** 是 → 那是 annotated bibliography。
-
-**三条**：每段第一句是**论断** · 证据按**支持/反证/存疑**分层 · **矛盾正面处理**。
-
----
-
-## 三、三种结构（选一，不要混）
-
-**时间序**（怎么长出来的）· **主题式**（按维度切，最常用）· **论证式**（立论→反论→综合，最值钱）。
-
----
-
-## 四、机检
-
-```bash
-python scripts/check_review_article.py <综述.md | 目录>   # 自称与配置自洽（R1 硬）
-python scripts/check_ref_citations.py --doc <综述.md>      # 正文 [n] ↔ 文末编号表（核查④）
-```
-
-| | 查什么 | 性质 |
-|---|---|---|
-| **R1** | 标题（或摘要自我描述）自称「系统综述 / 荟萃分析 / 范围综述」→ 必须有方法学要素 | 硬 |
-| **R2** | 「待核 / 未定来源」标注的行数 | 软，只报数 |
-
-> ⚠️ R1 **不扫摘要里出现的「荟萃分析」**——那是引用别人（「网络荟萃分析显示…」）。
-> 实测：不加这条限制，20 篇真稿**误报 3 篇**。
-
----
-
-## 自检
-
-```bash
-python scripts/selfcheck.py --strict
-```
-
----
-
-## 边界
-
-| | 管什么 |
-|---|---|
-| **本 skill** | **怎么写**一篇综述 |
-| `literature-pipeline` | 检索 + 证据表 |
-| `ai-academic-writing` | 表达层 / 内容层（去 AI 味等） |
-| `citation-reviewer` | 成文之后的引用审查 / 排版 |
-| `peer-review` | 审**别人**的稿 |
-
----
-
-## 来源
-
-R1 那条规则不是想出来的——来自一份**真实核稿报告**（2026-08-08，
-《精神分裂症患者体重管理及代谢干预》质量评价）的「高优先问题 1」。
-
----
-
-## 许可
-
-MIT。
+并入理由：综述与论文的 ④–⑨ 步（润色 / 表达层 / 内容层 / 核查链 / 自审 / AI 边界）完全共用，
+只有 ①–③ 不同。拆成两个仓等于把同一套动作写两遍。
